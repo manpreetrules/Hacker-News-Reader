@@ -201,6 +201,13 @@ if 'VCAP_SERVICES' in os.environ:
 			'PORT': cred['port'],
 			}
 		}
-else:
+elif 'DATABASE_URL' in os.environ:
 	# Heroku and local database
 	DATABASES = {'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))}
+else:
+    DATABASES = {
+		'default': {
+			'ENGINE': 'django.db.backends.sqlite3',
+			'NAME': 'hn.db',
+		}
+	}

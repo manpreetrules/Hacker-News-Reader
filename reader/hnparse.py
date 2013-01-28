@@ -11,7 +11,6 @@ import parsedatetime.parsedatetime as pdt
 import parsedatetime.parsedatetime_consts as pdc
 from tzlocal import get_localzone
 from collections import OrderedDict
-import lxml
 import re
 
 
@@ -19,7 +18,6 @@ c = pdc.Constants()
 p = pdt.Calendar(c)
 tz = get_localzone()
 # Getting rid of unused warning for lxml
-lxml = lxml
 
 
 def fetch(commentid=None, story_type=None, over_filter=0):
@@ -46,7 +44,7 @@ def fetch(commentid=None, story_type=None, over_filter=0):
 
 def stories(story_type, over_filter):
 	doc = fetch(story_type=story_type, over_filter=over_filter)
-	soup = BeautifulSoup(doc, 'lxml')
+	soup = BeautifulSoup(doc)
 	# HN markup is odd. Basically every story use three rows each
 	stories_soup = soup.html.body.table.findAll('table')[1].findAll("tr")[::3]
 	updated_cache = False
