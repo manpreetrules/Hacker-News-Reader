@@ -69,7 +69,7 @@ def stories(story_type, over_filter):
 
 def comments(commentid, cache_minutes=20):
 	doc = fetch(commentid=commentid)
-	soup = BeautifulSoup(doc, 'lxml')
+	soup = BeautifulSoup(doc)
 	try:
 		story_soup = soup.html.body.table.findAll('table')[1].find('tr')
 	except AttributeError:
